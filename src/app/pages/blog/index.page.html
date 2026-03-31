@@ -1,0 +1,84 @@
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+  <div appFadeIn class="mb-12">
+    <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.22em] mb-3"
+       style="color: var(--color-accent)">{{ 'blog.index.eyebrow' | translate }}</p>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4"
+        style="color: var(--color-text)">{{ 'blog.index.latest_title' | translate }}</h1>
+    <p class="max-w-2xl" style="color: var(--color-text-muted)">
+      {{ 'blog.index.latest_subtitle' | translate }}
+    </p>
+  </div>
+
+  <div appFadeIn [fadeDelay]="80" class="mb-10">
+    <label for="blog-search" class="sr-only">{{ 'blog.index.search_label' | translate }}</label>
+    <div class="relative">
+      <input
+        id="blog-search"
+        type="search"
+        [value]="searchQuery()"
+        (input)="onSearch($event)"
+        [placeholder]="'blog.index.search_placeholder' | translate"
+        class="w-full rounded-xl border px-4 py-3.5 text-sm outline-none transition-colors"
+        style="background-color: var(--color-bg-raised); border-color: var(--color-border); color: var(--color-text)"
+      />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6 lg:gap-8">
+    <aside appFadeIn [fadeDelay]="120" class="lg:sticky lg:top-16 h-fit">
+      <div class="rounded-xl border p-4"
+           style="background-color: var(--color-bg-raised); border-color: var(--color-border)">
+        <h2 class="text-sm font-semibold mb-4" style="color: var(--color-text)">
+          {{ 'blog.index.categories_title' | translate }}
+        </h2>
+        <div class="flex flex-col gap-2">
+          @for (category of categories(); track category.id) {
+            <button
+              type="button"
+              (click)="activeCategory.set(category.id)"
+              class="flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors text-left"
+              [style.background-color]="activeCategory() === category.id ? 'color-mix(in srgb, var(--color-accent) 14%, transparent)' : 'transparent'"
+              [style.color]="activeCategory() === category.id ? 'var(--color-text)' : 'var(--color-text-muted)'"
+            >
+              <span>
+                @if (category.id === 'all') {
+                  {{ 'blog.index.categories_all' | translate }}
+                } @else {
+                  {{ category.name }}
+                }
+              </span>
+              <span class="text-xs">{{ category.count }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div appFadeIn [fadeDelay]="160" class="flex items-center justify-between mb-5">
+        <h2 class="text-lg font-semibold" style="color: var(--color-text)">{{ 'blog.index.latest_title' | translate }}</h2>
+        <p class="text-sm" style="color: var(--color-text-muted)">
+          {{ 'blog.index.count' | translate: { count: filteredPosts().length } }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        @for (post of filteredPosts(); track post.slug; let i = $index) {
+          <div appFadeIn [fadeDelay]="i * 70 + 180">
+            <app-blog-card [post]="toCardData(post)" />
+          </div>
+        }
+      </div>
+
+      @if (filteredPosts().length === 0) {
+        <div class="rounded-xl border p-8 mt-6 text-center"
+             style="background-color: var(--color-bg-raised); border-color: var(--color-border)">
+          <p class="font-medium mb-1" style="color: var(--color-text)">{{ 'blog.index.empty_title' | translate }}</p>
+          <p class="text-sm" style="color: var(--color-text-muted)">
+            {{ 'blog.index.empty_subtitle' | translate }}
+          </p>
+        </div>
+      }
+    </main>
+  </div>
+</section>

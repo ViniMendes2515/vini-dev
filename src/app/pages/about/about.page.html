@@ -1,0 +1,100 @@
+<section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+
+  <div appFadeIn class="mb-16">
+    <p class="text-sm font-semibold uppercase tracking-widest mb-2"
+       style="color: var(--color-accent)">{{ 'about.eyebrow' | translate }}</p>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-8"
+        style="color: var(--color-text)">
+      {{ 'about.title' | translate }}
+    </h1>
+
+    <div class="max-w-2xl space-y-4">
+      <p class="leading-relaxed" style="color: var(--color-text-muted)">
+        {{ 'about.bio_1' | translate }}
+      </p>
+      <p class="leading-relaxed" style="color: var(--color-text-muted)">
+        {{ 'about.bio_2' | translate }}
+      </p>
+      <p class="leading-relaxed" style="color: var(--color-text-muted)">
+        {{ 'about.bio_3' | translate }}
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mt-8">
+      <a href="/assets/cv/curriculo-pt.pdf" download
+         class="inline-flex items-center gap-2 border px-5 py-2.5 rounded-lg text-sm font-medium transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+         style="border-color: var(--color-border); color: var(--color-text)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        {{ 'about.cv_pt' | translate }}
+      </a>
+      <a href="/assets/cv/resume-en.pdf" download
+         class="inline-flex items-center gap-2 border px-5 py-2.5 rounded-lg text-sm font-medium transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+         style="border-color: var(--color-border); color: var(--color-text)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        {{ 'about.cv_en' | translate }}
+      </a>
+    </div>
+  </div>
+
+  <hr class="mb-16" style="border-color: var(--color-border)" />
+
+  <!-- Timeline -->
+  <div appFadeIn [fadeDelay]="100">
+    <h2 class="text-xl sm:text-2xl font-semibold mb-3" style="color: var(--color-text)">
+      {{ 'about.timeline_title' | translate }}
+    </h2>
+    <p class="text-sm mb-8 sm:mb-10 max-w-2xl" style="color: var(--color-text-muted)">
+      Experiencias recentes em uma linha do tempo com foco em impacto, engenharia e evolucao tecnica.
+    </p>
+
+    <div class="relative pl-0 sm:pl-3">
+      <div class="hidden sm:block absolute left-[8.25rem] top-2 bottom-2 w-px"
+           style="background: linear-gradient(to bottom, color-mix(in srgb, var(--color-accent) 42%, transparent), var(--color-border), color-mix(in srgb, var(--color-accent) 35%, transparent));"></div>
+
+      <div class="space-y-5 sm:space-y-6">
+        @for (item of timeline; track item.year; let i = $index; let isFirst = $first) {
+          <article
+            appFadeIn
+            [fadeDelay]="i * 90"
+            class="group relative grid grid-cols-1 sm:grid-cols-[7.5rem_1fr] gap-3 sm:gap-6 items-start rounded-2xl border p-4 sm:p-5 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-xl"
+            style="background-color: color-mix(in srgb, var(--color-bg-raised) 88%, transparent); border-color: color-mix(in srgb, var(--color-border) 88%, transparent); backdrop-filter: blur(8px);"
+          >
+            <div class="relative z-10 flex flex-col items-start sm:items-end pt-0.5">
+              <span
+                class="inline-flex items-center justify-center whitespace-nowrap min-w-[3.2rem] px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold border"
+                [style.background-color]="isFirst ? 'color-mix(in srgb, var(--color-accent) 20%, transparent)' : 'var(--color-surface)'"
+                [style.color]="isFirst ? 'var(--color-text)' : 'var(--color-accent)'"
+                style="border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));"
+              >
+                {{ item.year }}
+              </span>
+            </div>
+
+            <div class="relative">
+              <span
+                class="hidden sm:block absolute -left-[2rem] top-4 w-2.5 h-2.5 rounded-full border-2 z-10"
+                [style.background-color]="isFirst ? 'var(--color-accent)' : 'var(--color-bg-raised)'"
+                style="border-color: var(--color-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 24%, transparent);"
+              ></span>
+
+              <div class="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+                <h3 class="font-semibold text-sm sm:text-base leading-tight" style="color: var(--color-text)">
+                  {{ item.roleKey | translate }}
+                </h3>
+                <span class="text-[11px] sm:text-xs font-medium px-2 py-0.5 rounded-full"
+                      style="background-color: var(--color-surface); color: var(--color-accent)">
+                  {{ item.company }}
+                </span>
+              </div>
+
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-muted)">
+                {{ item.descriptionKey | translate }}
+              </p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+
+</section>

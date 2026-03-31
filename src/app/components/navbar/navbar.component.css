@@ -1,0 +1,17 @@
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--color-text) !important;
+}
+
+.active-link {
+  color: var(--color-accent) !important;
+}
+
+nav,
+a,
+button {
+  pointer-events: auto;
+}

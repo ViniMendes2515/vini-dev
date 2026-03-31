@@ -1,0 +1,62 @@
+<div class="shadow-overlay-container">
+  <div
+    class="shadow-layer"
+    [style.inset.px]="-displacementScale"
+    [style.filter]="animationEnabled && !reducedMotionEnabled ? 'url(#' + filterId + ') blur(4px)' : 'none'"
+  >
+    @if (animationEnabled && !reducedMotionEnabled) {
+      <svg class="sr-only-svg" aria-hidden="true" focusable="false">
+        <defs>
+          <filter [id]="filterId">
+            <feTurbulence
+              result="undulation"
+              numOctaves="2"
+              [attr.baseFrequency]="baseFrequency"
+              seed="0"
+              type="turbulence"
+            />
+            <feColorMatrix
+              #hueRotateNode
+              in="undulation"
+              type="hueRotate"
+              values="180"
+            />
+            <feColorMatrix
+              in="dist"
+              result="circulation"
+              type="matrix"
+              values="4 0 0 0 1 4 0 0 0 1 4 0 0 0 1 1 0 0 0 0"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="circulation"
+              [attr.scale]="displacementScale"
+              result="dist"
+            />
+            <feDisplacementMap
+              in="dist"
+              in2="undulation"
+              [attr.scale]="displacementScale"
+              result="output"
+            />
+          </filter>
+        </defs>
+      </svg>
+    }
+
+    <div
+      class="shadow-mask"
+      [style.backgroundColor]="color"
+      [style.maskSize]="sizing === 'stretch' ? '100% 100%' : 'cover'"
+      [style.webkitMaskSize]="sizing === 'stretch' ? '100% 100%' : 'cover'"
+    ></div>
+  </div>
+
+  @if (noise && noise.opacity > 0) {
+    <div
+      class="noise-layer"
+      [style.backgroundSize.px]="noiseScale"
+      [style.opacity]="noiseOpacity"
+    ></div>
+  }
+</div>

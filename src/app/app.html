@@ -1,0 +1,18 @@
+<div class="app-etheral-bg-layer" aria-hidden="true">
+  <app-etheral-shadow
+    color="rgba(124, 58, 237, 0.25)"
+    [animation]="backgroundAnimation"
+    [noise]="backgroundNoise"
+    sizing="fill"
+  />
+</div>
+
+<div class="app-etheral-content-layer">
+  <app-navbar />
+  <main class="pt-16 min-h-screen relative">
+    <div class="app-route-shell" [class.route-changing]="routeChanging()" [class.route-entering]="routeEntering()">
+      <router-outlet />
+    </div>
+  </main>
+  <app-footer class="relative" />
+</div>

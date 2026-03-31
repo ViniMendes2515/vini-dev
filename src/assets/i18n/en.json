@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "about": "About"
+  },
+  "hero": {
+    "eyebrow": "Full Stack Developer",
+    "greeting": "Hi, I'm Vinicius Mendes",
+    "role": "Full Stack Developer · Minas Gerais, Brazil",
+    "tagline": "I build systems that scale — from backend to browser.",
+    "cta_projects": "View Projects",
+    "cta_cv": "Download CV",
+    "stack_label": "Stack"
+  },
+  "metrics": {
+    "experience": "years of experience",
+    "production": "platform in production",
+    "stack": "technologies mastered"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Things I've built",
+    "private_badge": "Private code · NDA",
+    "view_demo": "View demo",
+    "view_code": "View code",
+    "items": {
+      "mitsu": {
+        "description": "Live ticketing platform with real events and real revenue in production. High-performance Go backend with Redis queues and Angular frontend."
+      },
+      "ai_whatsapp": {
+        "description": "AI agent for store support via WhatsApp. Integrates Claude API for intelligent responses with strict data validation using Zod."
+      },
+      "ad_architecture": {
+        "description": "Academic Active Directory architecture project for a fictional company — GPOs, OUs, users, and documented security policies."
+      },
+      "portfolio": {
+        "description": "This website — built with Angular 21, Analog.js (SSG/SSR), Tailwind CSS v4, PT/EN i18n, and automatic deployment on Vercel."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "who am i",
+    "title": "About",
+    "bio_1": "I'm Vinicius Mendes, a Full Stack developer based in Minas Gerais, Brazil. I've been working professionally in software development for 3 years, focused on robust backend systems and modern interfaces.",
+    "bio_2": "I started at Bravo Serviços Logísticos as an intern and grew to analyst, always looking to solve real problems with technology. Along the way, I created Mitsu — a live ticketing platform built with Go, Angular, and Redis, now in production with real users and revenue.",
+    "bio_3": "I have a particular affinity for Go for high-performance backends, TypeScript on the frontend with Angular, and AI APIs for intelligent automation.",
+    "timeline_title": "Career Timeline",
+    "cv_pt": "Currículo (PT)",
+    "cv_en": "Resume (EN)",
+    "timeline": {
+      "items": {
+        "2025": {
+          "role": "Software Development Analyst",
+          "description": "Full stack development with Node.js, TypeScript, and Angular. Responsible for critical production features and architecture for new solutions."
+        },
+        "2024": {
+          "role": "Development Assistant",
+          "description": "Progressed from intern to assistant. Started technical leadership in small deliveries and participated in architecture decisions."
+        },
+        "2023": {
+          "role": "Software Development Internship",
+          "description": "First contact with a professional environment. Oracle, SQL, and internal process stack."
+        },
+        "2022": {
+          "role": "Academic Projects",
+          "description": "Networking, Active Directory, and first projects in Python. Technical foundation that guides my career."
+        }
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Thoughts on technology and development",
+    "read_more": "Read more",
+    "reading_time": "{{time}} read",
+    "back": "← Back to blog",
+    "share_linkedin": "Share on LinkedIn",
+    "share_x": "Share on X",
+    "index": {
+      "eyebrow": "Blog",
+      "latest_title": "Latest Updates",
+      "latest_subtitle": "Articles about software engineering, backend, frontend, and career growth.",
+      "search_label": "Search articles",
+      "search_placeholder": "Search articles by title, description, or tag...",
+      "categories_title": "Categories",
+      "categories_all": "All articles",
+      "count": "{{count}} article(s)",
+      "empty_title": "No articles found",
+      "empty_subtitle": "Try another search term or select a different category."
+    }
+  },
+  "contact": {
+    "eyebrow": "get in touch",
+    "title": "Contact",
+    "subtitle": "Let's talk",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent! I'll get back to you soon.",
+    "error": "Error sending. Please try again.",
+    "or_reach": "Or find me at",
+    "resume_label": "Currículo / Resume"
+  },
+  "footer": {
+    "rights": "© 2025 Vinicius Mendes"
+  },
+  "theme": {
+    "toggle_dark": "Dark mode",
+    "toggle_light": "Light mode"
+  }
+}

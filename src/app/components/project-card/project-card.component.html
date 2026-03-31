@@ -1,0 +1,62 @@
+<article
+  class="group relative flex flex-col rounded-xl p-6 border h-full
+         transition-all duration-300 hover:scale-[1.015] hover:shadow-xl"
+  style="background-color: var(--color-bg-raised); border-color: var(--color-border)"
+>
+  <!-- Hover accent bar -->
+  <div
+    class="absolute top-0 left-0 h-0.5 w-0 rounded-tl-xl rounded-tr-xl transition-all duration-500 group-hover:w-full"
+    style="background-color: var(--color-accent)"
+  ></div>
+
+  <div class="flex items-start justify-between mb-3">
+    <h3 class="text-base" style="font-family: 'Syne', sans-serif; font-weight: 600; color: var(--color-text)">
+      {{ project.name }}
+    </h3>
+    @if (project.isPrivate) {
+      <span class="text-xs px-2 py-0.5 rounded-full border ml-2 shrink-0"
+            style="background-color: var(--color-surface); color: var(--color-text-muted); border-color: var(--color-border)">
+        {{ 'projects.private_badge' | translate }}
+      </span>
+    }
+  </div>
+
+  <p class="text-sm leading-relaxed mb-4 flex-1" style="color: var(--color-text-muted)">
+    @if (project.descriptionKey) {
+      {{ project.descriptionKey | translate }}
+    } @else {
+      {{ project.description }}
+    }
+  </p>
+
+  <div class="flex flex-wrap gap-2 mb-4">
+    @for (tag of project.tags; track tag) {
+      <span class="text-xs px-2 py-0.5 rounded font-medium flex items-center gap-1.5"
+            style="background-color: var(--color-surface); color: var(--color-accent)">
+        @if (techIconService.hasIcon(tag)) {
+          <img [src]="techIconService.getIcon(tag)" [alt]="tag" class="w-3.5 h-3.5 object-contain flex-shrink-0" loading="lazy" decoding="async" />
+        }
+        {{ tag }}
+      </span>
+    }
+  </div>
+
+  <div class="flex gap-4 mt-auto">
+    @if (project.demo) {
+      <a [href]="project.demo" target="_blank" rel="noopener"
+         class="flex items-center gap-1 text-xs font-medium transition-colors hover:underline"
+         style="color: var(--color-accent)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        {{ 'projects.view_demo' | translate }}
+      </a>
+    }
+    @if (project.github && !project.isPrivate) {
+      <a [href]="project.github" target="_blank" rel="noopener"
+         class="flex items-center gap-1 text-xs font-medium transition-colors hover:text-[var(--color-text)]"
+         style="color: var(--color-text-muted)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        {{ 'projects.view_code' | translate }}
+      </a>
+    }
+  </div>
+</article>

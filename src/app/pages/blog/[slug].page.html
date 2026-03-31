@@ -1,0 +1,58 @@
+@if (post$ | async; as post) {
+  <article class="max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+
+    <a routerLink="/blog"
+       class="inline-flex items-center gap-1 text-sm mb-10 transition-colors hover:text-[var(--color-accent)]"
+       style="color: var(--color-text-muted)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      {{ 'blog.back' | translate }}
+    </a>
+
+    <div class="flex flex-wrap gap-2 mb-4">
+      @for (tag of post.attributes.tags; track tag) {
+        <span class="text-xs px-2 py-0.5 rounded font-medium flex items-center gap-1.5"
+              style="background-color: var(--color-surface); color: var(--color-accent)">
+          @if (techIconService.hasIcon(tag)) {
+            <img [src]="techIconService.getIcon(tag)" [alt]="tag" class="w-3.5 h-3.5 object-contain flex-shrink-0" loading="lazy" decoding="async" />
+          }
+          {{ tag }}
+        </span>
+      }
+    </div>
+
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4 leading-tight"
+        style="color: var(--color-text)">
+      {{ post.attributes.title }}
+    </h1>
+
+    <div class="flex items-center gap-2 text-sm mb-10 pb-10 border-b"
+         style="color: var(--color-text-muted); border-color: var(--color-border)">
+      <time>{{ post.attributes.date | date: 'dd MMMM yyyy' : undefined : (post.attributes.lang === 'en' ? 'en-US' : 'pt-BR') }}</time>
+      <span>·</span>
+      <span>{{ 'blog.reading_time' | translate: { time: post.attributes.readingTime } }}</span>
+    </div>
+
+    <div class="max-w-none">
+      <analog-markdown [content]="post.content" classes="blog-prose" />
+    </div>
+
+    <div class="mt-16 pt-10 border-t flex gap-6"
+         style="border-color: var(--color-border)">
+      <a [href]="linkedinUrl(post.attributes.title)"
+         target="_blank" rel="noopener"
+         class="flex items-center gap-2 text-sm transition-colors hover:text-[var(--color-accent)]"
+         style="color: var(--color-text-muted)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        {{ 'blog.share_linkedin' | translate }}
+      </a>
+      <a [href]="xUrl(post.attributes.title)"
+         target="_blank" rel="noopener"
+         class="flex items-center gap-2 text-sm transition-colors hover:text-[var(--color-accent)]"
+         style="color: var(--color-text-muted)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        {{ 'blog.share_x' | translate }}
+      </a>
+    </div>
+
+  </article>
+}

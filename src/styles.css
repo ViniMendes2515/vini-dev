@@ -1,0 +1,314 @@
+/* Fonts — Syne (headings, geometric+distinctive) + DM Sans (body) + JetBrains Mono (code) */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ── Light mode ────────────────────────────────────── */
+:root {
+  --color-bg:         #FAFAFA;
+  --color-bg-raised:  #FFFFFF;
+  --color-text:       #0D0D0D;
+  --color-text-muted: #6B6B6B;
+  --color-accent:     #7C3AED;
+  --color-border:     #E4E4E7;
+  --color-surface:    #F4F4F5;
+  --ease-route:       cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ── Dark mode — true black ────────────────────────── */
+.dark {
+  --color-bg:         #0A0A0A;
+  --color-bg-raised:  #111111;
+  --color-text:       #FAFAFA;
+  --color-text-muted: #737373;
+  --color-accent:     #A78BFA;
+  --color-border:     #1F1F1F;
+  --color-surface:    #141414;
+}
+
+/* ── Base ───────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: background-color 250ms ease, color 250ms ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark mode subtle radial glow at top */
+.dark body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 40% at 50% -10%, rgba(167,139,250,0.09) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* All page content above the glow */
+app-root { position: relative; z-index: 1; }
+
+.app-etheral-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app-etheral-bg-layer app-etheral-shadow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+}
+
+.app-etheral-content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+.app-route-shell {
+  transform-origin: top center;
+  transition: opacity 180ms var(--ease-route), transform 220ms var(--ease-route);
+}
+
+.app-route-shell.route-changing {
+  opacity: 0.78;
+  transform: translateY(8px) scale(0.996);
+}
+
+.app-route-shell.route-entering {
+  animation: route-enter 320ms var(--ease-route);
+}
+
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.996);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-route-shell,
+  .app-route-shell.route-changing,
+  .app-route-shell.route-entering {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Navbar */
+.navbar-header {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar-scrolled {
+  background-color: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  border-bottom-color: var(--color-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 0 var(--color-border);
+}
+
+/* Headings use Syne */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Fade-in animation */
+.fade-in-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-in-visible {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Code blocks in blog */
+.analog-markdown p { text-align: left; }
+
+pre {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+code:not(pre code) {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+}
+
+/* Blog markdown typography */
+.blog-prose {
+  color: var(--color-text-muted);
+  font-size: 1.02rem;
+  line-height: 1.78;
+}
+
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4 {
+  color: var(--color-text);
+  letter-spacing: -0.015em;
+  line-height: 1.22;
+  margin-top: 2.2rem;
+  margin-bottom: 0.85rem;
+}
+
+.blog-prose h2 {
+  font-size: clamp(1.45rem, 2.8vw, 1.85rem);
+}
+
+.blog-prose h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+}
+
+.blog-prose p,
+.blog-prose ul,
+.blog-prose ol,
+.blog-prose pre,
+.blog-prose blockquote {
+  margin-top: 0.95rem;
+  margin-bottom: 0.95rem;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  padding-left: 1.3rem;
+}
+
+.blog-prose li {
+  margin: 0.35rem 0;
+}
+
+.blog-prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.blog-prose a:hover {
+  filter: brightness(1.08);
+}
+
+.blog-prose blockquote {
+  border-left: 3px solid color-mix(in srgb, var(--color-accent) 65%, var(--color-border));
+  padding: 0.2rem 0 0.2rem 1rem;
+  color: color-mix(in srgb, var(--color-text-muted) 92%, #fff);
+  font-style: italic;
+}
+
+.blog-prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+/* Analog auto markdown route (used in /blog/:slug) */
+.analog-markdown-route {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 5.5rem 1.5rem 6rem;
+  color: var(--color-text-muted);
+  font-size: 1.02rem;
+  line-height: 1.78;
+}
+
+.analog-markdown-route > :first-child {
+  margin-top: 0;
+}
+
+.analog-markdown-route h1,
+.analog-markdown-route h2,
+.analog-markdown-route h3,
+.analog-markdown-route h4 {
+  color: var(--color-text);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-top: 2.2rem;
+  margin-bottom: 0.9rem;
+}
+
+.analog-markdown-route h1 {
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+}
+
+.analog-markdown-route h2 {
+  font-size: clamp(1.45rem, 3vw, 1.85rem);
+}
+
+.analog-markdown-route h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+}
+
+.analog-markdown-route p,
+.analog-markdown-route ul,
+.analog-markdown-route ol,
+.analog-markdown-route pre,
+.analog-markdown-route blockquote {
+  margin-top: 0.95rem;
+  margin-bottom: 0.95rem;
+}
+
+.analog-markdown-route ul,
+.analog-markdown-route ol {
+  padding-left: 1.3rem;
+}
+
+.analog-markdown-route li {
+  margin: 0.35rem 0;
+}
+
+.analog-markdown-route a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.analog-markdown-route blockquote {
+  border-left: 3px solid color-mix(in srgb, var(--color-accent) 65%, var(--color-border));
+  padding: 0.2rem 0 0.2rem 1rem;
+  color: color-mix(in srgb, var(--color-text-muted) 92%, #fff);
+  font-style: italic;
+}
