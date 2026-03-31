@@ -2,6 +2,7 @@
   "nav": {
     "home": "Início",
     "projects": "Projetos",
+    "books": "Livros",
     "blog": "Blog",
     "contact": "Contato",
     "about": "Sobre"
@@ -112,5 +113,19 @@
   "theme": {
     "toggle_dark": "Modo escuro",
     "toggle_light": "Modo claro"
+  },
+  "books": {
+    "eyebrow": "leituras",
+    "title": "Livros",
+    "subtitle": "Livros que li, estou lendo e quero ler — técnicos e não-técnicos que moldaram minha visão como desenvolvedor.",
+    "stat_read": "lidos",
+    "stat_reading": "lendo",
+    "stat_queue": "na fila",
+    "section_technical": "Técnicos",
+    "section_nontechnical": "Não-Técnicos",
+    "status_read": "Lido",
+    "status_reading": "Lendo",
+    "status_queue": "Na fila",
+    "buy_link": "Comprar"
   }
 }

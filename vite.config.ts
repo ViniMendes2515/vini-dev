@@ -25,6 +25,7 @@ export default defineConfig(({ mode }) => ({
           '/',
           '/about',
           '/projects',
+          '/books',
           '/contact',
           '/blog',
           '/blog/construindo-mitsu-go-redis',

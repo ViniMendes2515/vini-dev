@@ -9,13 +9,18 @@ import {
   importProvidersFrom,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideContent, withMarkdownRenderer } from '@analogjs/content';
+import { withPrismHighlighter } from '@analogjs/content/prism-highlighter';
 import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import localeEn from '@angular/common/locales/en';
 import localePt from '@angular/common/locales/pt';
+
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-go';
 
 import pt from '../assets/i18n/pt.json';
 import en from '../assets/i18n/en.json';
@@ -35,8 +40,9 @@ class InlineTranslateLoader implements TranslateLoader {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideAnimationsAsync(),
     provideFileRouter(),
-    provideContent(withMarkdownRenderer()),
+    provideContent(withMarkdownRenderer(), withPrismHighlighter()),
     provideHttpClient(
       withFetch(),
       withInterceptors([requestContextInterceptor])

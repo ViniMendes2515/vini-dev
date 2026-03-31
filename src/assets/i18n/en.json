@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "projects": "Projects",
+    "books": "Books",
     "blog": "Blog",
     "contact": "Contact",
     "about": "About"
@@ -112,5 +113,19 @@
   "theme": {
     "toggle_dark": "Dark mode",
     "toggle_light": "Light mode"
+  },
+  "books": {
+    "eyebrow": "reading list",
+    "title": "Books",
+    "subtitle": "Books I've read, am reading, and want to read — technical and non-technical reads that shaped my view as a developer.",
+    "stat_read": "read",
+    "stat_reading": "reading",
+    "stat_queue": "queued",
+    "section_technical": "Technical",
+    "section_nontechnical": "Non-Technical",
+    "status_read": "Read",
+    "status_reading": "Reading",
+    "status_queue": "Queued",
+    "buy_link": "Buy"
   }
 }

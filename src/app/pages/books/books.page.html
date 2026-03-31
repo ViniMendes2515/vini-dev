@@ -1,0 +1,171 @@
+<section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+
+  <!-- Header -->
+  <div appFadeIn class="mb-12">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-2"
+       style="color: var(--color-accent); font-family: 'JetBrains Mono', monospace">
+      {{ 'books.eyebrow' | translate }}
+    </p>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
+        style="font-family: 'Syne', sans-serif; color: var(--color-text)">
+      {{ 'books.title' | translate }}
+    </h1>
+    <p class="max-w-xl text-base leading-relaxed" style="color: var(--color-text-muted)">
+      {{ 'books.subtitle' | translate }}
+    </p>
+  </div>
+
+  <!-- Stats -->
+  <div appFadeIn [fadeDelay]="80" class="flex flex-wrap gap-3 mb-14">
+    <div class="stat-chip">
+      <span class="stat-value">{{ readCount }}</span>
+      <span class="stat-label">{{ 'books.stat_read' | translate }}</span>
+    </div>
+    <div class="stat-chip stat-chip--reading">
+      <span class="stat-value">{{ readingCount }}</span>
+      <span class="stat-label">{{ 'books.stat_reading' | translate }}</span>
+    </div>
+    <div class="stat-chip stat-chip--queue">
+      <span class="stat-value">{{ queueCount }}</span>
+      <span class="stat-label">{{ 'books.stat_queue' | translate }}</span>
+    </div>
+  </div>
+
+  <div class="h-px mb-14" style="background: linear-gradient(to right, var(--color-accent), transparent)"></div>
+
+  <!-- Two-column layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10">
+
+    <!-- Technical -->
+    <div>
+      <div appFadeIn [fadeDelay]="100" class="section-header mb-6">
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--color-text)">
+          {{ 'books.section_technical' | translate }}
+        </h2>
+        <span class="section-count">{{ technical.length }}</span>
+      </div>
+
+      <div class="space-y-3">
+        @for (book of technical; track book.title; let i = $index) {
+          <div appFadeIn [fadeDelay]="120 + i * 50">
+            <article class="book-card group relative">
+              <!-- Hover accent bar -->
+              <div class="book-card-accent"></div>
+
+              <!-- Cover -->
+              <div class="book-cover-wrap flex-shrink-0">
+                @if (book.isbn) {
+                  <img
+                    [src]="getCoverUrl(book.isbn)"
+                    [alt]="book.title"
+                    class="book-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                } @else {
+                  <div class="book-cover-placeholder">
+                    {{ getInitials(book.title) }}
+                  </div>
+                }
+              </div>
+
+              <!-- Info -->
+              <div class="flex flex-col flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-2 mb-0.5">
+                  <h3 class="book-title">{{ book.title }}</h3>
+                  <span class="status-badge status-{{ book.status }}" [attr.aria-label]="book.status">
+                    @if (book.status === 'read') { {{ 'books.status_read' | translate }} }
+                    @if (book.status === 'reading') { {{ 'books.status_reading' | translate }} }
+                    @if (book.status === 'queue') { {{ 'books.status_queue' | translate }} }
+                  </span>
+                </div>
+                <p class="book-author">{{ book.author }}</p>
+                <div class="stars" [attr.aria-label]="book.rating + ' de 5 estrelas'">
+                  @for (star of getStars(book.rating); track $index) {
+                    <svg width="12" height="12" viewBox="0 0 24 24" [class.star-full]="star === 'full'" [class.star-empty]="star === 'empty'">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  }
+                </div>
+                <p class="book-desc">{{ book.description }}</p>
+                <a
+                  class="buy-link"
+                  [href]="getBuyUrl(book)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ 'books.buy_link' | translate }}
+                </a>
+              </div>
+            </article>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Non-Technical -->
+    <div>
+      <div appFadeIn [fadeDelay]="150" class="section-header mb-6">
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 700; color: var(--color-text)">
+          {{ 'books.section_nontechnical' | translate }}
+        </h2>
+        <span class="section-count">{{ nonTechnical.length }}</span>
+      </div>
+
+      <div class="space-y-3">
+        @for (book of nonTechnical; track book.title; let i = $index) {
+          <div appFadeIn [fadeDelay]="170 + i * 50">
+            <article class="book-card group relative">
+              <div class="book-card-accent"></div>
+
+              <div class="book-cover-wrap flex-shrink-0">
+                @if (book.isbn) {
+                  <img
+                    [src]="getCoverUrl(book.isbn)"
+                    [alt]="book.title"
+                    class="book-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                } @else {
+                  <div class="book-cover-placeholder">
+                    {{ getInitials(book.title) }}
+                  </div>
+                }
+              </div>
+
+              <div class="flex flex-col flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-2 mb-0.5">
+                  <h3 class="book-title">{{ book.title }}</h3>
+                  <span class="status-badge status-{{ book.status }}">
+                    @if (book.status === 'read') { {{ 'books.status_read' | translate }} }
+                    @if (book.status === 'reading') { {{ 'books.status_reading' | translate }} }
+                    @if (book.status === 'queue') { {{ 'books.status_queue' | translate }} }
+                  </span>
+                </div>
+                <p class="book-author">{{ book.author }}</p>
+                <div class="stars" [attr.aria-label]="book.rating + ' de 5 estrelas'">
+                  @for (star of getStars(book.rating); track $index) {
+                    <svg width="12" height="12" viewBox="0 0 24 24" [class.star-full]="star === 'full'" [class.star-empty]="star === 'empty'">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  }
+                </div>
+                <p class="book-desc">{{ book.description }}</p>
+                <a
+                  class="buy-link"
+                  [href]="getBuyUrl(book)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ 'books.buy_link' | translate }}
+                </a>
+              </div>
+            </article>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>

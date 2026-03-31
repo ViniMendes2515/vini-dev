@@ -25,13 +25,6 @@ export default class HomePageComponent {
     this.meta.updateTag({ name: 'description', content: 'Desenvolvedor Full Stack com 3+ anos de experiência. Stack: Node.js, Angular, Go, TypeScript. Baseado em Minas Gerais, Brasil.' });
     this.meta.updateTag({ property: 'og:title', content: 'Vinicius Mendes — Full Stack Developer' });
   }
-
-  metrics = [
-    { value: '3+', key: 'metrics.experience' },
-    { value: '1',  key: 'metrics.production' },
-    { value: '6+', key: 'metrics.stack' },
-  ];
-
   stackItems: StackItem[] = [
     { name: 'Node.js', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
     { name: 'TypeScript', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
@@ -56,5 +49,12 @@ export default class HomePageComponent {
   ];
 
   marqueeItems = [...this.stackItems, ...this.stackItems];
+
+  marqueeItems2 = [
+    ...this.stackItems.slice(10),
+    ...this.stackItems.slice(0, 10),
+    ...this.stackItems.slice(10),
+    ...this.stackItems.slice(0, 10),
+  ];
 }
 

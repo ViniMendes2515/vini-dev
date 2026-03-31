@@ -46,14 +46,26 @@
     <p class="text-xs font-semibold uppercase tracking-widest mb-4"
       style="color: var(--color-text-muted)">{{ 'hero.stack_label' | translate }}</p>
 
-    <div class="stack-marquee-lane">
-      <div class="stack-marquee-track stack-marquee-left">
-        @for (item of marqueeItems; track item.name + '-' + $index) {
-          <span class="stack-chip">
-            <img [src]="item.iconUrl" [alt]="item.name" loading="lazy" decoding="async" />
-            {{ item.name }}
-          </span>
-        }
+    <div class="stack-marquee-wrapper">
+      <div class="stack-marquee-lane">
+        <div class="stack-marquee-track stack-marquee-left">
+          @for (item of marqueeItems; track item.name + '-' + $index) {
+            <span class="stack-chip">
+              <img [src]="item.iconUrl" [alt]="item.name" loading="lazy" decoding="async" />
+              {{ item.name }}
+            </span>
+          }
+        </div>
+      </div>
+      <div class="stack-marquee-lane">
+        <div class="stack-marquee-track stack-marquee-right">
+          @for (item of marqueeItems2; track item.name + '-' + $index) {
+            <span class="stack-chip">
+              <img [src]="item.iconUrl" [alt]="item.name" loading="lazy" decoding="async" />
+              {{ item.name }}
+            </span>
+          }
+        </div>
       </div>
     </div>
   </div>

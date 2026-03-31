@@ -20,7 +20,7 @@ export class App implements OnInit, OnDestroy {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
-  readonly backgroundAnimation = { scale: 92, speed: 86 };
+  readonly backgroundAnimation = undefined;
   readonly backgroundNoise = { opacity: 0.34, scale: 1.08 };
   readonly routeChanging = signal(false);
   readonly routeEntering = signal(false);
